@@ -52,7 +52,7 @@ def get_schoolkid(search_string=''):
         target_schoolkid = Schoolkid.objects.get(
             full_name__contains=search_string
         )
-    except  MultipleObjectsReturned:
+    except MultipleObjectsReturned:
         print('Найдено несколько учеников! Введите ФИО полностью.')
         return None
     except ObjectDoesNotExist:
@@ -86,7 +86,7 @@ def fix_marks(schoolkid=None):
 
 
 def remove_chastisements(schoolkid=None):
-    """Удаление всех жалоб на заданного ученика."""
+    """Удаление всех замечаний на заданного ученика."""
 
     if schoolkid is None:
         print('Необходим профиль ученика!')
@@ -96,9 +96,9 @@ def remove_chastisements(schoolkid=None):
         schoolkid=schoolkid).delete()
 
     if deleted_chastisements == 0:
-        print('Жалобы не найдены. Изменений не внесено.')
+        print('Замечания не найдены. Изменений не внесено.')
     else:
-        print(f'Успешно! Записей жалоб удалено: {deleted_chastisements}.')
+        print(f'Успешно! Замечаний удалено: {deleted_chastisements}.')
 
 
 def create_commendation(
@@ -129,7 +129,7 @@ def create_commendation(
 
     if target_lesson is None:
         print('Ошибка! Урок не найден. '
-              'Проверьте название урока, год и литеру класса!')
+              'Проверьте название предмета, год и литеру класса!')
         return None
 
     comm_by_lesson = Commendation.objects.filter(
