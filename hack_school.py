@@ -132,6 +132,16 @@ def create_commendation(
               'Проверьте название урока, год и литеру класса!')
         return None
 
+    comm_by_lesson = Commendation.objects.filter(
+        schoolkid=schoolkid, teacher=target_lesson.teacher,
+        subject=target_lesson.subject, created=target_lesson.date)
+
+    if comm_by_lesson.exists():
+        print(f'Похвала по предмету "{target_lesson.subject}" '
+              f'на уроке от {target_lesson.date} уже есть. '
+               'Не создается больше одной похвалы на урок.')
+        return None
+
     comm_text = choice(COMMENDATIONS)
 
     comm = Commendation.objects.create(
