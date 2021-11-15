@@ -42,15 +42,15 @@ COMMENDATIONS = [
 CLASS_LETTERS = ['А', 'Б', 'В']
 
 
-def get_schoolkid(search_string=''):
+def get_schoolkid(full_name=''):
     """Поиск профиля ученика по ФИО."""
 
-    if not search_string:
+    if not full_name:
         print('Ошибка! Введите ФИО ученика.')
         return None
     try:
         target_schoolkid = Schoolkid.objects.get(
-            full_name__contains=search_string
+            full_name__contains=full_name
         )
     except MultipleObjectsReturned:
         print('Найдено несколько учеников! Введите ФИО полностью.')
@@ -156,10 +156,10 @@ def create_commendation(
           f'Похвала по предмету "{comm.subject}" создана: "{comm.text}".')
 
 
-def hack_school_diary(name, year, letter, subject):
+def hack_school_diary(full_name, year, letter, subject):
     """Весь функционал для исправления оценок и замечаний в одном вместе."""
 
-    target_schoolkid = get_schoolkid(name)
+    target_schoolkid = get_schoolkid(full_name)
 
     if target_schoolkid is None:
         return None
