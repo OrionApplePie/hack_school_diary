@@ -79,7 +79,7 @@ def fix_marks(schoolkid=None):
         mark.teacher_note = None
         mark.save()
 
-    if marks.count() == 0:
+    if not marks.count():
         print('Плохих оценок не найдено. Изменений не внесено.')
     else:
         print(f'Успешно! Оценок исправлено: {marks.count()}.')
@@ -95,7 +95,7 @@ def remove_chastisements(schoolkid=None):
     deleted_chastisements, _ = Chastisement.objects.filter(
         schoolkid=schoolkid).delete()
 
-    if deleted_chastisements == 0:
+    if not deleted_chastisements:
         print('Замечания не найдены. Изменений не внесено.')
     else:
         print(f'Успешно! Замечаний удалено: {deleted_chastisements}.')
